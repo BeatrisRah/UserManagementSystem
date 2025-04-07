@@ -1,16 +1,12 @@
 import { Router } from "express";
+import usersService from "../services/usersService.js";
 
 const userController = Router()
 
 userController.get('/', async (req, res) => {
-
-    const limit = 10;
-    const page = parseInt(req.query.page) || 1;
+    const reqestPage = parseInt(req.query.page)
     
-    const skip = (page - 1) * limit;
-    
-    const response = await fetch(`https://dummyjson.com/users?limit=${limit}&skip=${skip}`)
-    const usesrList = await response.json()
+    const [usesrList, limit, page] = await usersService.geAll(reqestPage)
     const total = usesrList.total;
     const totalPages = [...Array(Math.ceil(total / limit)).keys()].map(i => i + 1);
     
