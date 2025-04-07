@@ -1,3 +1,5 @@
+import checkFromData from "../utils/checkFromData.js";
+
 export default {
     async geAll(reqestPage = null){
         
@@ -10,5 +12,9 @@ export default {
         const usesrList = await res.json()
         
         return [usesrList, limit, page]
+    },
+
+    async loginUser(userData){
+        checkFromData(userData)
     }
 }

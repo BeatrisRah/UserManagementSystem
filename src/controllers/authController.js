@@ -18,6 +18,7 @@ authController.post('/login', async (req, res) => {
     
 
     try{
+        await usersService.loginUser(userData)
         
 
     } catch(err){
