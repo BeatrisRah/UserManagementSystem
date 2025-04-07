@@ -10,8 +10,9 @@ const port = process.env.PORT || 3000;
 app.engine('hbs', handlebars.engine({
     extname:'hbs',
     helpers:{
-        equals: (a, b) => a === b,
-        add: (a, b) => a + b,
+        equals: (a, b) =>  a === b,
+        add: (a, b, limit) => a + b > limit ? null : a + b,
+        subtract: (a, b) => a - b > 0 ? a - b : 1,
     }
 }))
 app.set('view engine', 'hbs')
