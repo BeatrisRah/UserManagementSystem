@@ -2,6 +2,7 @@ import express from 'express'
 import handlebars from 'express-handlebars'
 import 'dotenv/config'
 import router from './routes.js';
+import cookieParser from 'cookie-parser';
 
 
 const app =  express()
@@ -19,6 +20,7 @@ app.set('view engine', 'hbs')
 app.set('views', './src/views')
 
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 app.use(router)
 
 

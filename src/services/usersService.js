@@ -17,9 +17,8 @@ export default {
     async loginUser(userData){
         checkFromData(userData)
 
-        const token = await fetch('https://dummyjson.com/user/login', {
-            method:'POST',
+        const result = await reqester('https://dummyjson.com/user/login', userData)
 
-        })
+        return result.accessToken;
     }
 }

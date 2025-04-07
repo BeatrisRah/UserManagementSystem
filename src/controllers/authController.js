@@ -14,19 +14,18 @@ authController.get('/login', (req, res) => {
 
 authController.post('/login', async (req, res) => {
     const userData = req.body;
-    console.log(userData);
-    
 
     try{
-        await usersService.loginUser(userData)
-        
-
+        const token = await usersService.loginUser(userData)
+        res.cookie('auth', token)
+        // TODO Get user role with auth middlewaare
+        res.redirect('/')
     } catch(err){
         console.log(err.message);
-        
+        res.end()
+        // TODO: ERROR HANDLING
     }
 
-    res.end()
 })
 
 export default authController;
