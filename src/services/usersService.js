@@ -1,4 +1,5 @@
 import checkFromData from "../utils/checkFromData.js";
+import reqester from "../utils/reqester.js";
 
 export default {
     async geAll(reqestPage = null){
@@ -8,13 +9,17 @@ export default {
         const selection = ['image', 'firstName', 'lastName', 'email', 'company', 'role']
         
         const skip = (page - 1) * limit;
-        const res =  await fetch(`https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=${selection.join(',')}`)
-        const usesrList = await res.json()
+        const usesrList =  await reqester(`https://dummyjson.com/users?limit=${limit}&skip=${skip}&select=${selection.join(',')}`)
         
         return [usesrList, limit, page]
     },
 
     async loginUser(userData){
         checkFromData(userData)
+
+        const token = await fetch('https://dummyjson.com/user/login', {
+            method:'POST',
+
+        })
     }
 }
