@@ -7,6 +7,9 @@ export default async function(url, data = null, token = null){
         options['headers'] = {'Content-type': 'application/json'}
     }
 
+    if(token){
+        options['headers'].Authorization = `Bearer ${token}`
+    }
     
     const res = await fetch(url, options)
     if(!res.ok){
