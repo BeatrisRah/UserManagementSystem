@@ -1,5 +1,6 @@
 import { Router } from "express";
 import usersService from "../services/usersService.js";
+import { isAuth } from "../middlewares/authMiddleware.js";
 
 const authController = Router()
 
@@ -30,6 +31,12 @@ authController.post('/login', async (req, res) => {
         // TODO: ERROR HANDLING
     }
 
+})
+
+authController.get('/logout', isAuth, (req, res) => {
+    res.clearCookie('auth')
+    res.resetUser()
+    res.redirect('/')
 })
 
 export default authController;

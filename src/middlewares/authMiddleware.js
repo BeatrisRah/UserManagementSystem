@@ -7,6 +7,12 @@ export const setUser = (req, res, next) => {
     }
     }
 
+    res.resetUser = () => {
+        req.session.user = null
+        req.user = null
+        res.locals.user = null
+    }
+
     if(req.session.user){
         req.user = req.session.user
         res.locals.user = req.session.user
