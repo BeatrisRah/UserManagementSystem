@@ -55,8 +55,10 @@
                     {{email}}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap  text-sm font-medium">
-                    <a href='/{{id}}/edit' class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    <a href='/{{id}}/delete'  class="ml-2 text-red-600 hover:text-red-900">Delete</a>
+                    {{#if ../user}}
+                        <a href='/{{id}}/edit' class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        <a href='/{{id}}/delete'  class="ml-2 text-red-600 hover:text-red-900">Delete</a>
+                    {{/if}}
                 </td>
             </tr>
         {{/each}}

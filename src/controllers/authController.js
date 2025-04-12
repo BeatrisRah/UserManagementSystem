@@ -16,9 +16,13 @@ authController.post('/login', async (req, res) => {
     const userData = req.body;
 
     try{
-        const {token, role} = await usersService.loginUser(userData)
+        const {token, user} = await usersService.loginUser(userData)
         res.cookie('auth', token)
-        res.cookie('role', role)
+        res.setUser({
+            username:user.username, 
+            role:user.role,
+            id:user.id
+        })
         res.redirect('/')
     } catch(err){
         console.log(err.message);

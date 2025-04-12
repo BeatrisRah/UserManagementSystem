@@ -22,7 +22,7 @@ export default {
 
         return {
             token: result.accessToken,
-            role: userFullInfo.role
+            user:userFullInfo
         };
     }
 }
