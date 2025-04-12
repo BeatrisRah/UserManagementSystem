@@ -18,7 +18,11 @@ export default {
         checkFromData(userData)
 
         const result = await reqester('https://dummyjson.com/user/login', userData)
+        const userFullInfo = await reqester(`https://dummyjson.com/users/${result.id}`) //json dummy doesnt return role on default
 
-        return result.accessToken;
+        return {
+            token: result.accessToken,
+            role: userFullInfo.role
+        };
     }
 }

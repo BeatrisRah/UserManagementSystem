@@ -16,9 +16,9 @@ authController.post('/login', async (req, res) => {
     const userData = req.body;
 
     try{
-        const token = await usersService.loginUser(userData)
+        const {token, role} = await usersService.loginUser(userData)
         res.cookie('auth', token)
-        // TODO Get user role with auth middlewaare
+        res.cookie('role', role)
         res.redirect('/')
     } catch(err){
         console.log(err.message);
