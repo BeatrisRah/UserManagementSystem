@@ -6,6 +6,7 @@ const userController = Router()
 userController.get('/', async (req, res) => {
     const reqestPage = parseInt(req.query.page)
     
+    
     const [usesrList, limit, page] = await usersService.geAll(reqestPage)
     const total = usesrList.total;
     const totalPages = [...Array(Math.ceil(total / limit)).keys()].map(i => i + 1);

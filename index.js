@@ -3,6 +3,8 @@ import handlebars from 'express-handlebars'
 import 'dotenv/config'
 import router from './routes.js';
 import cookieParser from 'cookie-parser';
+import expressSession from 'express-session'
+import { setUser } from './src/middlewares/authMiddleware.js';
 
 
 const app =  express()
@@ -21,6 +23,16 @@ app.set('views', './src/views')
 
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
+app.use(expressSession({
+    secret: 'iLikerabbits',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        secure: false,
+        httpOnly:true}
+}))
+
+app.use(setUser)
 app.use(router)
 
 
