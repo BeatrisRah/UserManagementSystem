@@ -34,6 +34,28 @@ authController.post('/login', async (req, res) => {
 
 })
 
+authController.post('/register', async (req, res) => {
+    const userData = req.body;
+
+    try{
+        const {token, user} = await usersService.registerUser(userData)
+        res.cookie('auth', token)
+        console.log(user);
+        
+        res.setUser({
+            username:user.username, 
+            role:user.role,
+            id:user.id
+        })
+        res.redirect('/')
+    } catch(err){
+        const error = getErrorMessage(err)
+        res.render('register', { userData, error})
+
+    }
+
+})
+
 authController.get('/logout', isAuth, (req, res) => {
     res.clearCookie('auth')
     res.resetUser()

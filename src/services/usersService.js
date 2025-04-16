@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import checkFromData from "../utils/checkFromData.js";
 import reqester from "../utils/reqester.js";
 
@@ -24,5 +25,21 @@ export default {
             token: result.accessToken,
             user:userFullInfo
         };
+    },
+
+    async registerUser(userData){
+        checkFromData(userData)
+
+        const res = await reqester('https://dummyjson.com/users/add', userData)
+        const token = jwt.sign({ 
+            username: res.username, 
+            role:userData.role,
+            id:res.id
+        }, 'shhh'); // <- generating mock token since server doesnt support it
+        return {
+            token,
+            user: {username:res.username, role:userData.role, id:res.id}
+        }
+
     }
 }
