@@ -5,6 +5,7 @@ import router from './routes.js';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session'
 import { setUser } from './src/middlewares/authMiddleware.js';
+import { errorMiddleware } from './src/middlewares/errorMiddleware.js';
 
 
 const app =  express()
@@ -33,6 +34,7 @@ app.use(expressSession({
 }))
 
 app.use(setUser)
+app.use(errorMiddleware)
 app.use(router)
 
 
