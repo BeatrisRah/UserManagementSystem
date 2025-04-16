@@ -1,6 +1,7 @@
 import { Router } from "express";
 import usersService from "../services/usersService.js";
 import { isAuth } from "../middlewares/authMiddleware.js";
+import { getErrorMessage } from "../utils/errorMessage.js";
 
 const authController = Router()
 
@@ -26,9 +27,9 @@ authController.post('/login', async (req, res) => {
         })
         res.redirect('/')
     } catch(err){
-        console.log(err.message);
-        res.end()
-        // TODO: ERROR HANDLING
+        // const error = getErrorMessage(err)
+        res.render('login', { userData, error:'Something went wrong!'})
+
     }
 
 })
