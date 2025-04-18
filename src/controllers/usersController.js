@@ -1,5 +1,8 @@
 import { Router } from "express";
 import usersService from "../services/usersService.js";
+import { isAuth } from "../middlewares/authMiddleware.js";
+import { getErrorMessage } from "../utils/errorMessage.js";
+import checkFromData from "../utils/checkFromData.js";
 
 const userController = Router()
 
@@ -19,6 +22,13 @@ userController.get('/', async (req, res) => {
         totalPages, 
         isAdmin})
 })
+
+userController.get('/user/:userId/edit', isAuth, async (req, res) => {
+    const userID = req.params.userId;
+    const userData = await usersService.getOne(userID)
+    res.render('users/edit', {userData})
+})
+
 
 
 export default userController;

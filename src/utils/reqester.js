@@ -1,4 +1,4 @@
-export default async function(url, data = null, token = null){
+export default async function(url, data = null, token = null, edit = false){
     const options = {}
 
     if(data){
@@ -6,6 +6,8 @@ export default async function(url, data = null, token = null){
         options['body'] = JSON.stringify(data)
         options['headers'] = {'Content-type': 'application/json'}
     }
+
+    if(edit) options['method'] = 'PUT'
 
     if(token){
         options['headers'].Authorization = `Bearer ${token}`

@@ -41,5 +41,11 @@ export default {
             user: {username:res.username, role:userData.role, id:res.id}
         }
 
+    },
+
+    async getOne(userID){
+        return await reqester(`https://dummyjson.com/users/${userID}`)
+
+    },
     }
 }

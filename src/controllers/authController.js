@@ -40,7 +40,6 @@ authController.post('/register', async (req, res) => {
     try{
         const {token, user} = await usersService.registerUser(userData)
         res.cookie('auth', token)
-        console.log(user);
         
         res.setUser({
             username:user.username, 
