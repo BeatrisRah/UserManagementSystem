@@ -47,5 +47,8 @@ export default {
         return await reqester(`https://dummyjson.com/users/${userID}`)
 
     },
+
+    async editUSer(userID, data){
+        await reqester(`https://dummyjson.com/users/${userID}`, data, null, true)
     }
 }
